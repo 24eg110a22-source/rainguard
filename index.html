@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RainGuard: Smart Automatic Clothes Protection System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>RainGuard</h1>
+  <p>Smart Automatic Clothes Protection System</p>
+</header>
+
+<main class="layout">
+  <section class="stage" aria-label="Live view of the clothesline">
+    <svg id="scene" viewBox="0 0 640 300" role="img" aria-label="Clothesline with a sliding rain cover">
+      <defs>
+        <clipPath id="rainClip"><rect id="clipRect" x="0" y="0" width="640" height="300"/></clipPath>
+      </defs>
+      <rect id="sky" width="640" height="300"/>
+      <rect class="ground" y="280" width="640" height="20"/>
+      <rect class="post" x="40" y="70" width="8" height="210"/>
+      <rect class="post" x="592" y="70" width="8" height="210"/>
+      <line class="wire" x1="44" y1="90" x2="596" y2="90"/>
+      <g transform="translate(130 92)"><path class="cloth c1" d="M0 0L-28 10L-20 30L-12 26L-12 80L12 80L12 26L20 30L28 10Z"/></g>
+      <g transform="translate(260 92)"><rect class="cloth c2" x="-22" y="0" width="44" height="90" rx="3"/></g>
+      <g transform="translate(390 92)"><path class="cloth c3" d="M0 0L-28 10L-20 30L-12 26L-12 80L12 80L12 26L20 30L28 10Z"/></g>
+      <g transform="translate(500 92)"><path class="cloth c2" d="M-26 0L26 0L18 70L-18 70Z"/></g>
+      <g id="rain" clip-path="url(#rainClip)"></g>
+      <g id="canopy">
+        <path class="roof" d="M36 64L320 44L604 64Z"/>
+        <rect class="roof-edge" x="36" y="62" width="568" height="6" rx="3"/>
+      </g>
+    </svg>
+    <p id="headline" class="headline" aria-live="polite">Clothes are in the open</p>
+  </section>
+
+  <aside class="panel">
+    <h2 class="sr-only">Sensors and controls</h2>
+    <dl class="readouts">
+      <div><dt>Rain sensor</dt><dd id="rainVal">Dry</dd></div>
+      <div><dt>Humidity</dt><dd id="humVal">55%</dd></div>
+      <div><dt>Temperature</dt><dd id="tempVal">29&nbsp;°C</dd></div>
+      <div><dt>Cover</dt><dd id="coverVal">Open</dd></div>
+    </dl>
+
+    <fieldset class="mode">
+      <legend>Control mode</legend>
+      <label><input type="radio" name="mode" value="auto" checked> Automatic</label>
+      <label><input type="radio" name="mode" value="manual"> Manual</label>
+    </fieldset>
+
+    <div class="actions">
+      <button id="openBtn" disabled>Open cover</button>
+      <button id="closeBtn" disabled>Close cover</button>
+    </div>
+
+    <button id="rainBtn" class="sim" aria-pressed="false">Simulate rain</button>
+    <p class="hint">Automatic mode closes the cover when rain is sensed or humidity passes 85%, and reopens it after the air stays dry.</p>
+
+    <h3>Event log</h3>
+    <ul id="log" class="log"></ul>
+  </aside>
+</main>
+
+<footer class="foot">RainGuard frontend demo. Sensor values are simulated; connect your hardware in <code>js/app.js</code>.</footer>
+<script src="js/app.js"></script>
+</body>
+</html>
